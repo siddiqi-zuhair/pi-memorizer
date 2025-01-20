@@ -33,8 +33,8 @@ export default function Home() {
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   }
-  function shareScore() {
-    navigator.clipboard.writeText(
+  async function shareScore() {
+    await navigator.clipboard.writeText(
       `🥧π Challenge🥧 
 
 🔢 ${input}
