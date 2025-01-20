@@ -39,7 +39,7 @@ export default function Home() {
 
 🔢 ${input}
 ⭐ ${input.length} digits of π
-🏆 ${highScore}
+🏆 High score: ${highScore}
 🔗 ${window.location.href}
 `
     );
