@@ -49,7 +49,7 @@ export default function Home() {
 `,
       url: window.location.href,
     };
-    if (await navigator.canShare) {
+    if (navigator.canShare()) {
       await navigator.share(shareData);
     } else {
       await navigator.clipboard.writeText(shareData.text);
