@@ -5,7 +5,7 @@ export default function Home() {
   const [input, setInput] = useState("3.");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [incorrectGuess, setIncorrectGuess] = useState(false);
-  const [highScore, setHighScore] = useState(0) 
+  const [highScore, setHighScore] = useState(0);
   function checkPi(value: string) {
     console.log(value);
     console.log(pi.substring(0, input.length + 1));
@@ -14,15 +14,18 @@ export default function Home() {
       setInput(value);
     } else {
       setIncorrectGuess(true);
-      setHighScore(input.length)
-      localStorage.setItem("highScore", input.length.toString())
+      if (input.length > highScore) {
+        setHighScore(input.length);
+        localStorage.setItem("highScore", input.length.toString());
+      }
     }
   }
-  useEffect(() => { 
-    if(localStorage.getItem("highScore")) { 
-      setHighScore(+localStorage.getItem("highScore"))
+  useEffect(() => {
+    let highScore = localStorage.getItem("highScore")
+    if (highScore) {
+      setHighScore(+highScore);
     }
-  }, [highScore])
+  }, [highScore]);
   function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value;
     checkPi(value);
@@ -43,7 +46,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-start bg-zinc-600 text-white">
       <div className="container flex flex-col items-center justify-start gap-12 px-4 py-16">
         <h1 className="text-4xl font-black md:text-8xl">Pi Challenge</h1>
-        <h2 className="font-black text-3xl">{highScore == 0 ? null : `High score: ${highScore}`}</h2>
+        <h2 className="text-3xl font-black">
+          {highScore == 0 ? null : `High score: ${highScore}`}
+        </h2>
         <div className="flex flex-col items-center justify-center gap-5 text-center text-4xl font-black">
           Start typing the digits of pi!
           <textarea
@@ -57,7 +62,7 @@ export default function Home() {
             onChange={handleInput}
           />
           {incorrectGuess ? (
-            <div className="text-center text-4xl text-red-400 flex flex-col">
+            <div className="flex flex-col text-center text-4xl text-red-400">
               Wrong! Correct number was {pi[input.length]}
               <button
                 className="rounded-3xl bg-red-500 p-5 text-white"
