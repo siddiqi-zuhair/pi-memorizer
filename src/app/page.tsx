@@ -47,7 +47,7 @@ export default function Home() {
             onChange={handleInput}
           />
           {incorrectGuess ? (
-            <div className="text-center text-4xl text-red-400">
+            <div className="text-center text-4xl text-red-400 flex flex-col">
               Wrong! Correct number was {pi[input.length]}
               <button
                 className="rounded-3xl bg-red-500 p-5 text-white"
