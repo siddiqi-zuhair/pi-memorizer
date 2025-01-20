@@ -7,10 +7,7 @@ export default function Home() {
   const [incorrectGuess, setIncorrectGuess] = useState(false);
   const [highScore, setHighScore] = useState(0);
   function checkPi(value: string) {
-    console.log(value);
-    console.log(pi.substring(0, input.length + 1));
     if (value == pi.substring(0, input.length + 1)) {
-      console.log("correct!");
       setInput(value);
     } else {
       setIncorrectGuess(true);
