@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
-  const [input, setInput] = useState("3.");
+  const [input, setInput] = useState("3.1415926535897932384");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [incorrectGuess, setIncorrectGuess] = useState(false);
   const [toast, setToast] = useState(false);
@@ -34,10 +34,6 @@ export default function Home() {
     }
   }
   async function shareScore() {
-    setToast(true);
-    setTimeout(() => {
-      setToast(false);
-    }, 750);
     const shareData: ShareData = {
       title: "🥧π Challenge🥧",
       text: `🥧π Challenge🥧 
@@ -46,16 +42,17 @@ export default function Home() {
 🏆 High score: ${highScore}
 🔗 ${window.location.href}
 `,
-      url: window.location.href,
     };
-    console.log(navigator.canShare(shareData));
-    if (navigator.canShare()) {
+
+    if (window.innerWidth < 768 && navigator.canShare(shareData)) {
       try {
         await navigator.share(shareData);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     } else {
+      setToast(true);
+      setTimeout(() => {
+        setToast(false);
+      }, 750);
       await navigator.clipboard.writeText(shareData.text ? shareData.text : "");
     }
   }
@@ -81,7 +78,7 @@ export default function Home() {
           Start typing the digits of π!
           <textarea
             ref={textareaRef}
-            className="border-1 h-fit w-11/12 resize-none rounded-[90px] border border-white bg-zinc-600 p-2 text-3xl lg:p-5 lg:px-10 lg:text-6xl"
+            className="border-1 no-scrollbar h-fit w-11/12 resize-none rounded-[90px] border border-white bg-zinc-600 p-2 text-3xl lg:p-5 lg:px-10 lg:text-6xl"
             value={input}
             disabled={incorrectGuess}
             name="pi-input"
