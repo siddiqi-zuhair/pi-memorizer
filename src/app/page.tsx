@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
-  const [input, setInput] = useState("3.1415926535897932384");
+  const [input, setInput] = useState("3.");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [incorrectGuess, setIncorrectGuess] = useState(false);
   const [toast, setToast] = useState(false);
