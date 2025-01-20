@@ -26,7 +26,7 @@ export default function Home() {
     }
   }
   function resetGame() {
-    setInput("");
+    setInput("3.");
     setIncorrectGuess(false);
   }
   const pi =
