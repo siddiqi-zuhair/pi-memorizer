@@ -42,15 +42,15 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start bg-zinc-600 text-white">
       <div className="container flex flex-col items-center justify-start gap-12 px-4 py-16">
-        <h1 className="text-4xl font-black md:text-8xl">Pi Challenge</h1>
-        <h2 className="text-3xl font-black">
+        <div className="font-black text-5xl md:text-8xl">Pi Challenge</div>
+        <div className="text-3xl font-black">
           {highScore == 0 ? null : `High score: ${highScore}`}
-        </h2>
-        <div className="flex flex-col items-center justify-center gap-5 text-center text-4xl font-black">
+        </div>
+        <div className="flex flex-col items-center justify-center gap-5 text-center text-2xl md:text-4xl font-black">
           Start typing the digits of pi!
           <textarea
             ref={textareaRef}
-            className="border-1 h-fit resize-none rounded-2xl border border-white bg-zinc-600 p-2 text-xl md:rounded-[90px] md:p-5 md:px-10 md:text-6xl"
+            className="border-1 h-fit w-11/12 resize-none border border-white bg-zinc-600 p-2 text-3xl rounded-[90px] lg:p-5 lg:px-10 lg:text-6xl"
             value={input}
             disabled={incorrectGuess}
             name="pi-input"
