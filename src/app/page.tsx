@@ -18,9 +18,9 @@ export default function Home() {
     }
   }
   useEffect(() => {
-    let highScore = localStorage.getItem("highScore")
-    if (highScore) {
-      setHighScore(+highScore);
+    const hs = localStorage.getItem("highScore")
+    if (hs) {
+      setHighScore(+hs);
     }
   }, [highScore]);
   function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
