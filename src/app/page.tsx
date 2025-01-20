@@ -18,7 +18,7 @@ export default function Home() {
     }
   }
   useEffect(() => {
-    const hs = localStorage.getItem("highScore")
+    const hs = localStorage.getItem("highScore");
     if (hs) {
       setHighScore(+hs);
     }
@@ -33,6 +33,17 @@ export default function Home() {
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   }
+  function shareScore() {
+    navigator.clipboard.writeText(
+      `🥧π Challenge🥧 
+
+🔢 ${input}
+⭐ ${input.length} digits of π
+🏆 ${highScore}
+🔗 ${window.location.href}
+`
+    );
+  }
   function resetGame() {
     setInput("3.");
     setIncorrectGuess(false);
@@ -42,15 +53,15 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start bg-zinc-600 text-white">
       <div className="container flex flex-col items-center justify-start gap-12 px-4 py-16">
-        <div className="font-black text-5xl md:text-8xl">Pi Challenge</div>
+        <div className="text-5xl font-black md:text-8xl">π Challenge</div>
         <div className="text-3xl font-black">
           {highScore == 0 ? null : `High score: ${highScore}`}
         </div>
-        <div className="flex flex-col items-center justify-center gap-5 text-center text-2xl md:text-4xl font-black">
-          Start typing the digits of pi!
+        <div className="flex flex-col items-center justify-center gap-5 text-center text-2xl font-black md:text-4xl">
+          Start typing the digits of π!
           <textarea
             ref={textareaRef}
-            className="border-1 h-fit w-11/12 resize-none border border-white bg-zinc-600 p-2 text-3xl rounded-[90px] lg:p-5 lg:px-10 lg:text-6xl"
+            className="border-1 h-fit w-11/12 resize-none rounded-[90px] border border-white bg-zinc-600 p-2 text-3xl lg:p-5 lg:px-10 lg:text-6xl"
             value={input}
             disabled={incorrectGuess}
             name="pi-input"
@@ -59,13 +70,19 @@ export default function Home() {
             onChange={handleInput}
           />
           {incorrectGuess ? (
-            <div className="flex flex-col text-center text-4xl text-red-400">
+            <div className="flex flex-col gap-5 text-center text-4xl text-red-400">
               Wrong! Correct number was {pi[input.length]}
               <button
                 className="rounded-3xl bg-red-500 p-5 text-white"
                 onClick={() => resetGame()}
               >
                 Try Again?
+              </button>
+              <button
+                className="rounded-3xl bg-slate-600 p-5 text-white"
+                onClick={() => shareScore()}
+              >
+                Share your score!
               </button>
             </div>
           ) : null}
