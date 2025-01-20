@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start bg-zinc-600 text-white">
       <div className="container flex flex-col items-center justify-start gap-12 px-4 py-16">
-        <h1 className="text-4xl font-black md:text-8xl">Pi Challenge!</h1>
+        <h1 className="text-4xl font-black md:text-8xl">Pi Challenge</h1>
         <div className="flex flex-col items-center justify-center gap-5 text-center text-4xl font-black">
           Start typing the digits of pi!
           <textarea
