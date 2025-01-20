@@ -44,6 +44,7 @@ export default function Home() {
             disabled={incorrectGuess}
             name="pi-input"
             rows={1}
+            inputMode="numeric"
             onChange={handleInput}
           />
           {incorrectGuess ? (
