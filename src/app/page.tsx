@@ -37,7 +37,6 @@ export default function Home() {
     const shareData: ShareData = {
       title: "🥧π Challenge🥧",
       text: `🥧π Challenge🥧 
-🔢 ${input}
 ⭐ ${input.length} digits of π
 🏆 High score: ${highScore}
 🔗 ${window.location.href}
