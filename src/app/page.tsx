@@ -29,7 +29,6 @@ export default function Home() {
     checkPi(value);
     const textarea = textareaRef.current;
     if (textarea) {
-      console.log("textarea");
       textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
@@ -39,7 +38,7 @@ export default function Home() {
     setTimeout(() => {
       setToast(false);
     }, 750);
-    const shareData = {
+    const shareData: ShareData = {
       title: "🥧π Challenge🥧",
       text: `🥧π Challenge🥧 
 🔢 ${input}
@@ -49,10 +48,15 @@ export default function Home() {
 `,
       url: window.location.href,
     };
+    console.log(navigator.canShare(shareData));
     if (navigator.canShare()) {
-      await navigator.share(shareData);
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log(err);
+      }
     } else {
-      await navigator.clipboard.writeText(shareData.text);
+      await navigator.clipboard.writeText(shareData.text ? shareData.text : "");
     }
   }
   function resetGame() {
@@ -64,7 +68,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start bg-zinc-600 text-white">
       <div
-        className={`duration-750 absolute top-20 z-20 rounded-3xl bg-white p-5  text-2xl md:text-3xl font-black text-black ease-in-out ${toast ? `opacity-100` : `opacity-0`} transition-opacity`}
+        className={`duration-750 absolute top-20 z-20 rounded-3xl bg-white p-5 text-2xl font-black text-black ease-in-out md:text-3xl ${toast ? `opacity-100` : `opacity-0`} transition-opacity`}
       >
         Score copied to clipboard
       </div>
@@ -95,7 +99,7 @@ export default function Home() {
                 Try Again?
               </button>
               <button
-                className="rounded-3xl bg-slate-600 p-5 text-white hover:bg-slate-500 "
+                className="rounded-3xl bg-slate-600 p-5 text-white hover:bg-slate-500"
                 onClick={() => shareScore()}
               >
                 Share your score!
